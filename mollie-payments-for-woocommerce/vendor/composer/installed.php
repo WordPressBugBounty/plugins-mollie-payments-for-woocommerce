@@ -1,50 +1,5 @@
-<?php return array(
-    'root' => array(
-        'name' => 'mollie/mollie-woocommerce',
-        'pretty_version' => 'dev-release/7.8.0',
-        'version' => 'dev-release/7.8.0',
-        'reference' => 'c0b2d820614bca2c65423780ee3819dea4c95069',
-        'type' => 'wordpress-plugin',
-        'install_path' => __DIR__ . '/../../',
-        'aliases' => array(),
-        'dev' => false,
-    ),
-    'versions' => array(
-        'composer/ca-bundle' => array(
-            'pretty_version' => '1.5.1',
-            'version' => '1.5.1.0',
-            'reference' => '063d9aa8696582f5a41dffbbaf3c81024f0a604a',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/./ca-bundle',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'mollie/mollie-api-php' => array(
-            'pretty_version' => 'v2.71.0',
-            'version' => '2.71.0.0',
-            'reference' => 'dff324f0621ff134fbefffa42ee511833a58578f',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../mollie/mollie-api-php',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'mollie/mollie-woocommerce' => array(
-            'pretty_version' => 'dev-release/7.8.0',
-            'version' => 'dev-release/7.8.0',
-            'reference' => 'c0b2d820614bca2c65423780ee3819dea4c95069',
-            'type' => 'wordpress-plugin',
-            'install_path' => __DIR__ . '/../../',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'psr/log' => array(
-            'pretty_version' => '1.1.4',
-            'version' => '1.1.4.0',
-            'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../psr/log',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-    ),
-);
+<?php
+
+namespace Mollie;
+
+return array('root' => array('name' => 'mollie/mollie-woocommerce', 'pretty_version' => 'dev-develop', 'version' => 'dev-develop', 'reference' => 'e40e046034a9dae6d8b7dcc6142e80f4e4e882ae', 'type' => 'wordpress-plugin', 'install_path' => __DIR__ . '/../../', 'aliases' => array(), 'dev' => \false), 'versions' => array('composer/ca-bundle' => array('pretty_version' => '1.5.2', 'version' => '1.5.2.0', 'reference' => '48a792895a2b7a6ee65dd5442c299d7b835b6137', 'type' => 'library', 'install_path' => __DIR__ . '/./ca-bundle', 'aliases' => array(), 'dev_requirement' => \false), 'inpsyde/modularity' => array('pretty_version' => '1.5.1', 'version' => '1.5.1.0', 'reference' => '3bbff6197aabbc4df25b5f386f521bedc71aff2e', 'type' => 'library', 'install_path' => __DIR__ . '/../inpsyde/modularity', 'aliases' => array(), 'dev_requirement' => \false), 'mollie/mollie-api-php' => array('pretty_version' => 'v2.72.0', 'version' => '2.72.0.0', 'reference' => 'cdfb298ff61737a077554c001e936e6134e7ed8e', 'type' => 'library', 'install_path' => __DIR__ . '/../mollie/mollie-api-php', 'aliases' => array(), 'dev_requirement' => \false), 'mollie/mollie-woocommerce' => array('pretty_version' => 'dev-develop', 'version' => 'dev-develop', 'reference' => 'e40e046034a9dae6d8b7dcc6142e80f4e4e882ae', 'type' => 'wordpress-plugin', 'install_path' => __DIR__ . '/../../', 'aliases' => array(), 'dev_requirement' => \false), 'psr/container' => array('pretty_version' => '1.0.0', 'version' => '1.0.0.0', 'reference' => 'b7ce3b176482dbbc1245ebf52b181af44c2cf55f', 'type' => 'library', 'install_path' => __DIR__ . '/../psr/container', 'aliases' => array(), 'dev_requirement' => \false), 'psr/log' => array('pretty_version' => '1.1.4', 'version' => '1.1.4.0', 'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11', 'type' => 'library', 'install_path' => __DIR__ . '/../psr/log', 'aliases' => array(), 'dev_requirement' => \false), 'sniccowp/php-scoper-wordpress-excludes' => array('pretty_version' => '6.6.0', 'version' => '6.6.0.0', 'reference' => '56cce0bed93ec18e04519de987f7bf78af5385c3', 'type' => 'library', 'install_path' => __DIR__ . '/../sniccowp/php-scoper-wordpress-excludes', 'aliases' => array(), 'dev_requirement' => \false)));

@@ -4,22 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
+class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
 {
     public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
-            'Psr\\Log\\' => 8,
-        ),
         'M' => 
         array (
-            'Mollie\\WooCommerce\\Vendor\\' => 26,
             'Mollie\\WooCommerce\\' => 19,
+            'Mollie\\Psr\\Log\\' => 15,
+            'Mollie\\Psr\\Container\\' => 21,
+            'Mollie\\Inpsyde\\Modularity\\' => 26,
+            'Mollie\\Inpsyde\\EnvironmentChecker\\' => 34,
             'Mollie\\Api\\' => 11,
-        ),
-        'I' => 
-        array (
-            'Inpsyde\\EnvironmentChecker\\' => 27,
         ),
         'C' => 
         array (
@@ -28,25 +23,29 @@ class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
     );
 
     public static $prefixDirsPsr4 = array (
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
-        ),
-        'Mollie\\WooCommerce\\Vendor\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/lib/packages',
-        ),
         'Mollie\\WooCommerce\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
+        'Mollie\\Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Mollie\\Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Mollie\\Inpsyde\\Modularity\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/inpsyde/modularity/src',
+        ),
+        'Mollie\\Inpsyde\\EnvironmentChecker\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/pluginEnvironmentChecker',
+        ),
         'Mollie\\Api\\' => 
         array (
             0 => __DIR__ . '/..' . '/mollie/mollie-api-php/src',
-        ),
-        'Inpsyde\\EnvironmentChecker\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/pluginEnvironmentChecker',
         ),
         'Composer\\CaBundle\\' => 
         array (
@@ -57,18 +56,6 @@ class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
     public static $classMap = array (
         'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Inpsyde\\EnvironmentChecker\\ConstraintsCollectionFactory' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/ConstraintsCollectionFactory.php',
-        'Inpsyde\\EnvironmentChecker\\ConstraintsCollectionFactoryInterface' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/ConstraintsCollectionFactoryInterface.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\AbstractVersionConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/AbstractVersionConstraint.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\ConstraintInterface' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/ConstraintInterface.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\ConstraintsCollection' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/ConstraintsCollection.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\ExtensionConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/ExtensionConstraint.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\PhpConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/PhpConstraint.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\PluginConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/PluginConstraint.php',
-        'Inpsyde\\EnvironmentChecker\\Constraints\\WordPressConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/WordPressConstraint.php',
-        'Inpsyde\\EnvironmentChecker\\EnvironmentChecker' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/EnvironmentChecker.php',
-        'Inpsyde\\EnvironmentChecker\\Exception\\ConstraintFailedException' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Exception/ConstraintFailedException.php',
-        'Inpsyde\\EnvironmentChecker\\Exception\\ConstraintFailedExceptionInterface' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Exception/ConstraintFailedExceptionInterface.php',
         'Mollie\\Api\\CompatibilityChecker' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/CompatibilityChecker.php',
         'Mollie\\Api\\Endpoints\\BalanceEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/BalanceEndpoint.php',
         'Mollie\\Api\\Endpoints\\BalanceReportEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/BalanceReportEndpoint.php',
@@ -204,6 +191,47 @@ class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
         'Mollie\\Api\\Types\\SettlementStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SettlementStatus.php',
         'Mollie\\Api\\Types\\SubscriptionStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SubscriptionStatus.php',
         'Mollie\\Api\\Types\\TerminalStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/TerminalStatus.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\ConstraintsCollectionFactory' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/ConstraintsCollectionFactory.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\ConstraintsCollectionFactoryInterface' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/ConstraintsCollectionFactoryInterface.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\AbstractVersionConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/AbstractVersionConstraint.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\ConstraintInterface' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/ConstraintInterface.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\ConstraintsCollection' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/ConstraintsCollection.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\ExtensionConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/ExtensionConstraint.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\PhpConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/PhpConstraint.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\PluginConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/PluginConstraint.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Constraints\\WordPressConstraint' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Constraints/WordPressConstraint.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\EnvironmentChecker' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/EnvironmentChecker.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Exception\\ConstraintFailedException' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Exception/ConstraintFailedException.php',
+        'Mollie\\Inpsyde\\EnvironmentChecker\\Exception\\ConstraintFailedExceptionInterface' => __DIR__ . '/../..' . '/pluginEnvironmentChecker/Exception/ConstraintFailedExceptionInterface.php',
+        'Mollie\\Inpsyde\\Modularity\\Container\\ContainerConfigurator' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/ContainerConfigurator.php',
+        'Mollie\\Inpsyde\\Modularity\\Container\\PackageProxyContainer' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/PackageProxyContainer.php',
+        'Mollie\\Inpsyde\\Modularity\\Container\\ReadOnlyContainer' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/ReadOnlyContainer.php',
+        'Mollie\\Inpsyde\\Modularity\\Module\\ExecutableModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/ExecutableModule.php',
+        'Mollie\\Inpsyde\\Modularity\\Module\\ExtendingModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/ExtendingModule.php',
+        'Mollie\\Inpsyde\\Modularity\\Module\\FactoryModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/FactoryModule.php',
+        'Mollie\\Inpsyde\\Modularity\\Module\\Module' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/Module.php',
+        'Mollie\\Inpsyde\\Modularity\\Module\\ModuleClassNameIdTrait' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/ModuleClassNameIdTrait.php',
+        'Mollie\\Inpsyde\\Modularity\\Module\\ServiceModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/ServiceModule.php',
+        'Mollie\\Inpsyde\\Modularity\\Package' => __DIR__ . '/..' . '/inpsyde/modularity/src/Package.php',
+        'Mollie\\Inpsyde\\Modularity\\Properties\\BaseProperties' => __DIR__ . '/..' . '/inpsyde/modularity/src/Properties/BaseProperties.php',
+        'Mollie\\Inpsyde\\Modularity\\Properties\\LibraryProperties' => __DIR__ . '/..' . '/inpsyde/modularity/src/Properties/LibraryProperties.php',
+        'Mollie\\Inpsyde\\Modularity\\Properties\\PluginProperties' => __DIR__ . '/..' . '/inpsyde/modularity/src/Properties/PluginProperties.php',
+        'Mollie\\Inpsyde\\Modularity\\Properties\\Properties' => __DIR__ . '/..' . '/inpsyde/modularity/src/Properties/Properties.php',
+        'Mollie\\Inpsyde\\Modularity\\Properties\\ThemeProperties' => __DIR__ . '/..' . '/inpsyde/modularity/src/Properties/ThemeProperties.php',
+        'Mollie\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
+        'Mollie\\Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
+        'Mollie\\Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
+        'Mollie\\Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
+        'Mollie\\Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
+        'Mollie\\Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
+        'Mollie\\Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareInterface.php',
+        'Mollie\\Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareTrait.php',
+        'Mollie\\Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
+        'Mollie\\Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
+        'Mollie\\Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
+        'Mollie\\Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
+        'Mollie\\Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Mollie\\Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'Mollie\\WooCommerce\\Activation\\ActivationModule' => __DIR__ . '/../..' . '/src/Activation/ActivationModule.php',
         'Mollie\\WooCommerce\\Activation\\ConstraintsChecker' => __DIR__ . '/../..' . '/src/Activation/ConstraintsChecker.php',
         'Mollie\\WooCommerce\\Activation\\PluginDisabler' => __DIR__ . '/../..' . '/src/Activation/PluginDisabler.php',
@@ -295,6 +323,7 @@ class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
         'Mollie\\WooCommerce\\PaymentMethods\\PaymentFieldsStrategies\\In3FieldsStrategy' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentFieldsStrategies/In3FieldsStrategy.php',
         'Mollie\\WooCommerce\\PaymentMethods\\PaymentFieldsStrategies\\IssuersDropdownBehavior' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentFieldsStrategies/IssuersDropdownBehavior.php',
         'Mollie\\WooCommerce\\PaymentMethods\\PaymentFieldsStrategies\\KbcFieldsStrategy' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentFieldsStrategies/KbcFieldsStrategy.php',
+        'Mollie\\WooCommerce\\PaymentMethods\\PaymentFieldsStrategies\\PaymentFieldsStrategiesTrait' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentFieldsStrategies/PaymentFieldsStrategiesTrait.php',
         'Mollie\\WooCommerce\\PaymentMethods\\PaymentFieldsStrategies\\PaymentFieldsStrategyI' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentFieldsStrategies/PaymentFieldsStrategyI.php',
         'Mollie\\WooCommerce\\PaymentMethods\\PaymentFieldsStrategies\\RivertyFieldsStrategy' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentFieldsStrategies/RivertyFieldsStrategy.php',
         'Mollie\\WooCommerce\\PaymentMethods\\PaymentMethodI' => __DIR__ . '/../..' . '/src/PaymentMethods/PaymentMethodI.php',
@@ -308,6 +337,7 @@ class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
         'Mollie\\WooCommerce\\PaymentMethods\\Riverty' => __DIR__ . '/../..' . '/src/PaymentMethods/Riverty.php',
         'Mollie\\WooCommerce\\PaymentMethods\\Satispay' => __DIR__ . '/../..' . '/src/PaymentMethods/Satispay.php',
         'Mollie\\WooCommerce\\PaymentMethods\\Sofort' => __DIR__ . '/../..' . '/src/PaymentMethods/Sofort.php',
+        'Mollie\\WooCommerce\\PaymentMethods\\Swish' => __DIR__ . '/../..' . '/src/PaymentMethods/Swish.php',
         'Mollie\\WooCommerce\\PaymentMethods\\Trustly' => __DIR__ . '/../..' . '/src/PaymentMethods/Trustly.php',
         'Mollie\\WooCommerce\\PaymentMethods\\Twint' => __DIR__ . '/../..' . '/src/PaymentMethods/Twint.php',
         'Mollie\\WooCommerce\\PaymentMethods\\Voucher' => __DIR__ . '/../..' . '/src/PaymentMethods/Voucher.php',
@@ -353,43 +383,14 @@ class ComposerStaticInit99dd93462bdd098a3d12154b8e71b543
         'Mollie\\WooCommerce\\Subscription\\SubscriptionModule' => __DIR__ . '/../..' . '/src/Subscription/SubscriptionModule.php',
         'Mollie\\WooCommerce\\Uninstall\\CleanDb' => __DIR__ . '/../..' . '/src/Uninstall/CleanDb.php',
         'Mollie\\WooCommerce\\Uninstall\\UninstallModule' => __DIR__ . '/../..' . '/src/Uninstall/UninstallModule.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Container\\ContainerConfigurator' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Container/ContainerConfigurator.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Container\\PackageProxyContainer' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Container/PackageProxyContainer.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Container\\ReadOnlyContainer' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Container/ReadOnlyContainer.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Module\\ExecutableModule' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Module/ExecutableModule.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Module\\ExtendingModule' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Module/ExtendingModule.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Module\\FactoryModule' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Module/FactoryModule.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Module\\Module' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Module/Module.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Module\\ModuleClassNameIdTrait' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Module/ModuleClassNameIdTrait.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Module\\ServiceModule' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Module/ServiceModule.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Package' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Package.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Properties\\BaseProperties' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Properties/BaseProperties.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Properties\\LibraryProperties' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Properties/LibraryProperties.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Properties\\PluginProperties' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Properties/PluginProperties.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Properties\\Properties' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Properties/Properties.php',
-        'Mollie\\WooCommerce\\Vendor\\Inpsyde\\Modularity\\Properties\\ThemeProperties' => __DIR__ . '/../..' . '/lib/packages/Inpsyde/Modularity/Properties/ThemeProperties.php',
-        'Mollie\\WooCommerce\\Vendor\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/../..' . '/lib/packages/Psr/Container/ContainerExceptionInterface.php',
-        'Mollie\\WooCommerce\\Vendor\\Psr\\Container\\ContainerInterface' => __DIR__ . '/../..' . '/lib/packages/Psr/Container/ContainerInterface.php',
-        'Mollie\\WooCommerce\\Vendor\\Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/../..' . '/lib/packages/Psr/Container/NotFoundExceptionInterface.php',
-        'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
-        'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
-        'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
-        'Psr\\Log\\LoggerAwareInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareInterface.php',
-        'Psr\\Log\\LoggerAwareTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerAwareTrait.php',
-        'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
-        'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
-        'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
-        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
-        'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
-        'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit99dd93462bdd098a3d12154b8e71b543::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit99dd93462bdd098a3d12154b8e71b543::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit99dd93462bdd098a3d12154b8e71b543::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5f1bf284400400658f0a0ca705864ad3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5f1bf284400400658f0a0ca705864ad3::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5f1bf284400400658f0a0ca705864ad3::$classMap;
 
         }, null, ClassLoader::class);
     }
