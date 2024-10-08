@@ -103,7 +103,7 @@ class MollieSubscriptionGateway extends MolliePaymentGateway
                 return;
             }
             // Check if WooCommerce Subscriptions Failed Recurring Payment Retry System is in-use, if it is, don't update subscription status
-            if (class_exists('WCS_Retry_Manager') && \Mollie\WCS_Retry_Manager::is_retry_enabled() && $subscription->get_date('payment_retry') > 0) {
+            if (class_exists('WCS_Retry_Manager') && \WCS_Retry_Manager::is_retry_enabled() && $subscription->get_date('payment_retry') > 0) {
                 $this->logger->debug(__METHOD__ . ' - WooCommerce Subscriptions Failed Recurring Payment Retry System in use, not updating subscription status to Active!');
                 return;
             }
