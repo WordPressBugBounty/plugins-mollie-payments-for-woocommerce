@@ -127,7 +127,7 @@ class AppleAjaxRequests
             return;
         }
         $paymentDetails = $this->whichCalculateTotals($applePayRequestDataObject);
-        $response = $this->responseTemplates->appleFormattedResponse($paymentDetails);
+        $response = $this->responseTemplates->appleFormattedResponse($paymentDetails, $applePayRequestDataObject);
         $this->responseTemplates->responseSuccess($response);
     }
     /**
@@ -147,7 +147,7 @@ class AppleAjaxRequests
             $this->responseTemplates->responseWithDataErrors($applePayRequestDataObject->errors());
         }
         $paymentDetails = $this->whichCalculateTotals($applePayRequestDataObject);
-        $response = $this->responseTemplates->appleFormattedResponse($paymentDetails);
+        $response = $this->responseTemplates->appleFormattedResponse($paymentDetails, $applePayRequestDataObject);
         $this->responseTemplates->responseSuccess($response);
     }
     /**

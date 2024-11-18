@@ -3,7 +3,7 @@ Contributors: daanvm, danielhuesken, davdebcom, dinamiko, syde, l.vangunst, ndij
 Tags: mollie, payments, payment gateway, woocommerce, credit card, apple pay, ideal, bancontact, klarna, sofort, woocommerce subscriptions 
 Requires at least: 3.8
 Tested up to: 6.6
-Stable tag: 7.8.2
+Stable tag: 7.9.0
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -221,6 +221,16 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 
 == Changelog ==
+
+= 7.9.0 - 18-11-2024 =
+
+* Feature - Revamp Mollie settings dashboard
+* Feature - Implement dedicated Block Express Cart/Checkout location for Apple Pay button
+* Feature - Trustly for first Payments
+* Fixed - Display notice in iDEAL settings about iDEAL 2.0 and removal of bank issuer dropdown
+* Fixed - Translation Update Loop in Mollie Payments for WooCommerce
+* Fixed - Bank Transfer payment details displayed in one line on order-received page
+
 
 = 7.8.2 - 08-09-2024 =
 

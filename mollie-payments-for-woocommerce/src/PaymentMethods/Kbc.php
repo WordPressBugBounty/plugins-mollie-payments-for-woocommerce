@@ -8,7 +8,7 @@ class Kbc extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMethod imple
     protected const DEFAULT_ISSUERS_DROPDOWN = 'yes';
     protected function getConfig(): array
     {
-        return ['id' => 'kbc', 'defaultTitle' => __('KBC/CBC Payment Button', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => __('Select your bank', 'mollie-payments-for-woocommerce'), 'paymentFields' => \true, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \true, 'SEPA' => \true];
+        return ['id' => 'kbc', 'defaultTitle' => __('KBC/CBC Payment Button', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => __('Select your bank', 'mollie-payments-for-woocommerce'), 'paymentFields' => \true, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \true, 'SEPA' => \true, 'docs' => 'https://www.mollie.com/gb/payments/kbc-cbc'];
     }
     public function getFormFields($generalFormFields): array
     {

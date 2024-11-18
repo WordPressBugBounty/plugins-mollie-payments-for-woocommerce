@@ -7,7 +7,7 @@ class Twint extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMethod imp
 {
     protected function getConfig(): array
     {
-        return ['id' => 'twint', 'defaultTitle' => __('Twint', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \false, 'SEPA' => \false];
+        return ['id' => 'twint', 'defaultTitle' => __('Twint', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \false, 'SEPA' => \false, 'docs' => 'https://www.mollie.com/gb/payments/twint'];
     }
     public function getFormFields($generalFormFields): array
     {

@@ -32,6 +32,7 @@ use Mollie\Api\Endpoints\PermissionEndpoint;
 use Mollie\Api\Endpoints\ProfileEndpoint;
 use Mollie\Api\Endpoints\ProfileMethodEndpoint;
 use Mollie\Api\Endpoints\RefundEndpoint;
+use Mollie\Api\Endpoints\SessionEndpoint;
 use Mollie\Api\Endpoints\SettlementCaptureEndpoint;
 use Mollie\Api\Endpoints\SettlementChargebackEndpoint;
 use Mollie\Api\Endpoints\SettlementPaymentEndpoint;
@@ -52,7 +53,7 @@ class MollieApiClient
     /**
      * Version of our client.
      */
-    public const CLIENT_VERSION = "2.72.0";
+    public const CLIENT_VERSION = "2.73.0";
     /**
      * Endpoint of the remote API.
      */
@@ -309,6 +310,12 @@ class MollieApiClient
      */
     public $clientLinks;
     /**
+     * RESTful Session resource.
+     *
+     * @var SessionEndpoint
+     */
+    public $sessions;
+    /**
      * @var string
      */
     protected $apiKey;
@@ -386,6 +393,7 @@ class MollieApiClient
         $this->settlementPayments = new SettlementPaymentEndpoint($this);
         $this->settlementRefunds = new SettlementRefundEndpoint($this);
         $this->settlements = new SettlementsEndpoint($this);
+        $this->sessions = new SessionEndpoint($this);
         $this->shipments = new ShipmentEndpoint($this);
         $this->subscriptionPayments = new SubscriptionPaymentEndpoint($this);
         $this->subscriptions = new SubscriptionEndpoint($this);

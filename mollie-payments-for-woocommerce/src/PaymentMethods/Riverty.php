@@ -8,7 +8,7 @@ class Riverty extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMethod i
 {
     protected function getConfig(): array
     {
-        return ['id' => 'riverty', 'defaultTitle' => __('Riverty', 'mollie-payments-for-woocommerce'), 'settingsDescription' => __('To accept payments via Riverty, all default WooCommerce checkout fields should be enabled and required.', 'mollie-payments-for-woocommerce'), 'defaultDescription' => '', 'paymentFields' => \true, 'additionalFields' => ['birthdate', 'phone'], 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \true, 'confirmationDelayed' => \false, 'SEPA' => \false, 'orderMandatory' => \true, 'phonePlaceholder' => __('Please enter your phone here. +316xxxxxxxx', 'mollie-payments-for-woocommerce'), 'birthdatePlaceholder' => __('Please enter your birthdate here.', 'mollie-payments-for-woocommerce')];
+        return ['id' => 'riverty', 'defaultTitle' => __('Riverty', 'mollie-payments-for-woocommerce'), 'settingsDescription' => __('To accept payments via Riverty, all default WooCommerce checkout fields should be enabled and required.', 'mollie-payments-for-woocommerce'), 'defaultDescription' => '', 'paymentFields' => \true, 'additionalFields' => ['birthdate', 'phone'], 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \true, 'confirmationDelayed' => \false, 'SEPA' => \false, 'orderMandatory' => \true, 'phonePlaceholder' => __('Please enter your phone here. +316xxxxxxxx', 'mollie-payments-for-woocommerce'), 'birthdatePlaceholder' => __('Please enter your birthdate here.', 'mollie-payments-for-woocommerce'), 'docs' => 'https://www.mollie.com/gb/payments/riverty'];
     }
     public function getFormFields($generalFormFields): array
     {

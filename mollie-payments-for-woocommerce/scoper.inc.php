@@ -22,7 +22,7 @@ return [
     // list<string|regex>
     'exclude-constants' => \array_merge($wp_constants, ['WC_VERSION', 'M4W_FILE', 'M4W_PLUGIN_DIR', 'M4W_PLUGIN_URL']),
     // list<string|regex>
-    'exclude-classes' => \array_merge($wp_classes, ['WooCommerce', '/^WC_/']),
+    'exclude-classes' => \array_merge($wp_classes, ['WooCommerce', '/^WC_/', '\WCS_Retry_Manager']),
     // list<string|regex>
     'exclude-functions' => \array_merge($wp_functions, ['/^wc/']),
     // list<string|regex>

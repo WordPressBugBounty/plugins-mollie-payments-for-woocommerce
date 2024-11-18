@@ -4,15 +4,14 @@
 declare (strict_types=1);
 namespace Mollie\WooCommerce\Settings;
 
-use Mollie\Inpsyde\Modularity\Module\ExecutableModule;
-use Mollie\Inpsyde\Modularity\Module\ModuleClassNameIdTrait;
-use Mollie\Inpsyde\Modularity\Module\ServiceModule;
 use Mollie\WooCommerce\Notice\AdminNotice;
 use Mollie\WooCommerce\SDK\Api;
-use Mollie\WooCommerce\Settings\Page\MollieSettingsPage;
 use Mollie\WooCommerce\Shared\Data;
 use Mollie\WooCommerce\Shared\Status;
 use Mollie\WooCommerce\Uninstall\CleanDb;
+use Mollie\Inpsyde\Modularity\Module\ExecutableModule;
+use Mollie\Inpsyde\Modularity\Module\ModuleClassNameIdTrait;
+use Mollie\Inpsyde\Modularity\Module\ServiceModule;
 use Mollie\Psr\Container\ContainerInterface;
 use Mollie\Psr\Log\LoggerInterface as Logger;
 class SettingsModule implements ServiceModule, ExecutableModule
@@ -92,6 +91,7 @@ class SettingsModule implements ServiceModule, ExecutableModule
         $this->dataHelper = $container->get('settings.data_helper');
         assert($this->dataHelper instanceof Data);
         $pluginPath = $container->get('shared.plugin_path');
+        $pluginUrl = $container->get('shared.plugin_url');
         $paymentMethods = $container->get('gateway.paymentMethods');
         // Add settings link to plugins page
         add_filter('plugin_action_links_' . $this->plugin_basename, [$this, 'addPluginActionLinks']);
@@ -120,7 +120,7 @@ class SettingsModule implements ServiceModule, ExecutableModule
         });
         $gateways = $container->get('gateway.instances');
         $isSDDGatewayEnabled = $container->get('gateway.isSDDGatewayEnabled');
-        $this->initMollieSettingsPage($isSDDGatewayEnabled, $gateways, $pluginPath, $paymentMethods);
+        $this->initMollieSettingsPage($isSDDGatewayEnabled, $gateways, $pluginPath, $pluginUrl, $paymentMethods);
         add_action('woocommerce_admin_settings_sanitize_option', [$this->settingsHelper, 'updateMerchantIdOnApiKeyChanges'], 10, 2);
         add_action('update_option_mollie-payments-for-woocommerce_live_api_key', [$this->settingsHelper, 'updateMerchantIdAfterApiKeyChanges'], 10, 3);
         add_action('update_option_mollie-payments-for-woocommerce_test_api_key', [$this->settingsHelper, 'updateMerchantIdAfterApiKeyChanges'], 10, 3);
@@ -144,7 +144,8 @@ class SettingsModule implements ServiceModule, ExecutableModule
     public function maybeTestModeNotice(): bool
     {
         $testModeEnabled = get_option('mollie-payments-for-woocommerce_test_mode_enabled', \true);
-        $shouldShowNotice = $testModeEnabled === 'yes';
+        $testKeyEntered = get_option('mollie-payments-for-woocommerce_test_api_key', \true);
+        $shouldShowNotice = $testModeEnabled === 'yes' && !empty($testKeyEntered);
         if (!$shouldShowNotice) {
             return \false;
         }
@@ -185,17 +186,18 @@ class SettingsModule implements ServiceModule, ExecutableModule
      * @param $isSDDGatewayEnabled
      * @param $gateways
      * @param $pluginPath
+     * @param $pluginUrl
      * @param $paymentMethods
      * @return void
      */
-    protected function initMollieSettingsPage($isSDDGatewayEnabled, $gateways, $pluginPath, $paymentMethods): void
+    protected function initMollieSettingsPage($isSDDGatewayEnabled, $gateways, $pluginPath, $pluginUrl, $paymentMethods): void
     {
         if (!$isSDDGatewayEnabled) {
             //remove directdebit gateway from gateways list
             unset($gateways['mollie_wc_gateway_directdebit']);
         }
-        add_filter('woocommerce_get_settings_pages', function ($settings) use ($pluginPath, $gateways, $paymentMethods) {
-            $settings[] = new MollieSettingsPage($this->settingsHelper, $pluginPath, $gateways, $paymentMethods, $this->isTestModeEnabled, $this->dataHelper);
+        add_filter('woocommerce_get_settings_pages', function ($settings) use ($pluginPath, $pluginUrl, $gateways, $paymentMethods) {
+            $settings[] = new \Mollie\WooCommerce\Settings\MollieSettingsPage($this->settingsHelper, $pluginPath, $pluginUrl, $gateways, $paymentMethods, $this->isTestModeEnabled, $this->dataHelper);
             return $settings;
         });
     }

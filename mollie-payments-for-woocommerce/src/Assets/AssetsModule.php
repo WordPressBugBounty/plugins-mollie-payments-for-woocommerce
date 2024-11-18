@@ -46,7 +46,7 @@ class AssetsModule implements ExecutableModule
                 wp_localize_script('mollie_paypalButtonBlock', 'molliepaypalButtonCart', $dataToScripts->paypalbuttonScriptData(\true));
             }
             if (mollieWooCommerceIsApplePayDirectEnabled('cart') && !$this->cartHasSubscription($cart)) {
-                wp_register_script('mollie_applepayButtonBlock', $this->getPluginUrl($pluginUrl, '/public/js/applepayButtonBlockComponent.min.js'), [], (string) filemtime($this->getPluginPath($pluginPath, '/public/js/applepayButtonBlockComponent.min.js')), \true);
+                wp_register_script('mollie_applepayButtonBlock', $this->getPluginUrl($pluginUrl, '/public/js/applepayButtonBlock.min.js'), [], (string) filemtime($this->getPluginPath($pluginPath, '/public/js/applepayButtonBlock.min.js')), \true);
                 $dataToScripts = new DataToAppleButtonScripts();
                 wp_enqueue_style('mollie-applepaydirect');
                 wp_enqueue_script('mollie_applepayButtonBlock');
@@ -250,7 +250,7 @@ class AssetsModule implements ExecutableModule
     {
         // Only insert scripts on specific admin page
         global $current_screen, $current_tab, $current_section;
-        if ($current_screen->id !== 'woocommerce_page_wc-settings' || $current_tab !== 'mollie_settings' || $current_section !== 'advanced') {
+        if ($current_screen->id !== 'woocommerce_page_wc-settings' || $current_tab !== 'mollie_settings' || $current_section !== 'mollie_advanced') {
             return;
         }
         wp_enqueue_script('mollie_wc_gateway_advanced_settings');
@@ -329,8 +329,20 @@ class AssetsModule implements ExecutableModule
                 add_action('admin_enqueue_scripts', [$this, 'enqueueAdvancedSettingsJS'], 10, 1);
                 wp_localize_script('mollie_wc_admin_settings', 'mollieSettingsData', ['current_section' => $current_section]);
                 wp_register_script('mollie_wc_gateway_settings', $this->getPluginUrl($pluginUrl, '/public/js/gatewaySettings.min.js'), ['underscore', 'jquery'], $pluginVersion, \true);
+                wp_register_script('mollie_wc_settings_2024', $this->getPluginUrl($pluginUrl, '/public/js/mollie-settings-2024.min.js'), ['underscore', 'jquery'], $pluginVersion, \true);
+                $this->enqueueMollieSettings();
                 $this->enqueueIconSettings($current_section);
             }
         });
+    }
+    protected function enqueueMollieSettings()
+    {
+        $uri = isset($_SERVER['REQUEST_URI']) ? wc_clean(
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            wp_unslash($_SERVER['REQUEST_URI'])
+        ) : '';
+        if (is_string($uri) && strpos($uri, 'tab=mollie_settings')) {
+            wp_enqueue_script('mollie_wc_settings_2024');
+        }
     }
 }

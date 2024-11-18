@@ -42,7 +42,7 @@ class PluginConstraint extends AbstractVersionConstraint
         if (!function_exists('get_plugin_data')) {
             require_once \ABSPATH . 'wp-admin/includes/plugin.php';
         }
-        $pluginData = get_plugin_data($pathToPluginFile);
+        $pluginData = get_plugin_data($pathToPluginFile, \false);
         $currentVersion = $pluginData['Version'];
         $this->message = "The {$this->pluginDisplayName} plugin has to be version " . $this->requiredVersion . " or higher. Please update your {$this->pluginDisplayName} version.";
         $this->message = esc_html($this->message);

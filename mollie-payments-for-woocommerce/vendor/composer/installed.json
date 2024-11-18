@@ -81,34 +81,34 @@
         },
         {
             "name": "inpsyde\/modularity",
-            "version": "1.5.1",
-            "version_normalized": "1.5.1.0",
+            "version": "1.10.0",
+            "version_normalized": "1.10.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/inpsyde\/modularity.git",
-                "reference": "3bbff6197aabbc4df25b5f386f521bedc71aff2e"
+                "reference": "2119d0e32706741a3c6dc0a85d908ec19ebf142e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/inpsyde\/modularity\/zipball\/3bbff6197aabbc4df25b5f386f521bedc71aff2e",
-                "reference": "3bbff6197aabbc4df25b5f386f521bedc71aff2e",
+                "url": "https:\/\/api.github.com\/repos\/inpsyde\/modularity\/zipball\/2119d0e32706741a3c6dc0a85d908ec19ebf142e",
+                "reference": "2119d0e32706741a3c6dc0a85d908ec19ebf142e",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.2",
-                "psr\/container": "~1.0"
+                "php": ">=7.4 <8.4",
+                "psr\/container": "^1.1.0 || ^2"
             },
             "require-dev": {
                 "brain\/monkey": "^2.6.1",
-                "inpsyde\/php-coding-standards": "^1",
-                "johnpbloch\/wordpress-core": ">=5.8",
-                "mikey179\/vfsstream": "^v1.6.10",
-                "php-stubs\/wordpress-stubs": ">=5.8@stable",
-                "phpunit\/phpunit": "^8.5.21",
-                "vimeo\/psalm": "^4.13.1"
+                "inpsyde\/php-coding-standards": "^2@dev",
+                "inpsyde\/wp-stubs-versions": "dev-latest",
+                "mikey179\/vfsstream": "^v1.6.11",
+                "phpunit\/phpunit": "^9.6.19",
+                "roots\/wordpress-no-content": "@dev",
+                "vimeo\/psalm": "^5.24.0"
             },
-            "time": "2022-03-09T13:59:27+00:00",
+            "time": "2024-09-03T10:42:50+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -131,43 +131,28 @@
                     "email": "hello@inpsyde.com",
                     "homepage": "https:\/\/inpsyde.com\/",
                     "role": "Company"
-                },
-                {
-                    "name": "Christian Leucht",
-                    "email": "c.leucht@inpsyde.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Pablo Kauffman",
-                    "email": "p.kauffman@inpsyde.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Giuseppe Mazzapica",
-                    "email": "g.mazzapica@inpsyde.com",
-                    "role": "Developer"
                 }
             ],
             "description": "Modular PSR-11 implementation for WordPress plugins, themes or libraries.",
             "support": {
                 "issues": "https:\/\/github.com\/inpsyde\/modularity\/issues",
-                "source": "https:\/\/github.com\/inpsyde\/modularity\/tree\/1.5.1"
+                "source": "https:\/\/github.com\/inpsyde\/modularity\/tree\/1.10.0"
             },
             "install-path": "..\/inpsyde\/modularity"
         },
         {
             "name": "mollie\/mollie-api-php",
-            "version": "v2.72.0",
-            "version_normalized": "2.72.0.0",
+            "version": "v2.73.0",
+            "version_normalized": "2.73.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/mollie\/mollie-api-php.git",
-                "reference": "cdfb298ff61737a077554c001e936e6134e7ed8e"
+                "reference": "0a26175492d4c55bb461e44fe3e63546539b81c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/mollie\/mollie-api-php\/zipball\/cdfb298ff61737a077554c001e936e6134e7ed8e",
-                "reference": "cdfb298ff61737a077554c001e936e6134e7ed8e",
+                "url": "https:\/\/api.github.com\/repos\/mollie\/mollie-api-php\/zipball\/0a26175492d4c55bb461e44fe3e63546539b81c1",
+                "reference": "0a26175492d4c55bb461e44fe3e63546539b81c1",
                 "shasum": ""
             },
             "require": {
@@ -181,13 +166,13 @@
                 "eloquent\/liberator": "^2.0||^3.0",
                 "friendsofphp\/php-cs-fixer": "^3.0",
                 "guzzlehttp\/guzzle": "^6.3 || ^7.0",
-                "phpstan\/phpstan": "^1.4",
+                "phpstan\/phpstan": "^1.12",
                 "phpunit\/phpunit": "^8.5 || ^9.5"
             },
             "suggest": {
                 "mollie\/oauth2-mollie-php": "Use OAuth to authenticate with the Mollie API. This is needed for some endpoints. Visit https:\/\/docs.mollie.com\/ for more information."
             },
-            "time": "2024-09-11T15:06:31+00:00",
+            "time": "2024-09-30T13:16:57+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -246,33 +231,33 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/mollie\/mollie-api-php\/issues",
-                "source": "https:\/\/github.com\/mollie\/mollie-api-php\/tree\/v2.72.0"
+                "source": "https:\/\/github.com\/mollie\/mollie-api-php\/tree\/v2.73.0"
             },
             "install-path": "..\/mollie\/mollie-api-php"
         },
         {
             "name": "psr\/container",
-            "version": "1.0.0",
-            "version_normalized": "1.0.0.0",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/php-fig\/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
+                "reference": "9fc7aab7a78057a124384358ebae8a1711b6f6fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/php-fig\/container\/zipball\/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
+                "url": "https:\/\/api.github.com\/repos\/php-fig\/container\/zipball\/9fc7aab7a78057a124384358ebae8a1711b6f6fc",
+                "reference": "9fc7aab7a78057a124384358ebae8a1711b6f6fc",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=7.2.0"
             },
-            "time": "2017-02-14T16:28:37+00:00",
+            "time": "2021-03-05T15:48:30+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "installation-source": "dist",
@@ -288,7 +273,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http:\/\/www.php-fig.org\/"
+                    "homepage": "https:\/\/www.php-fig.org\/"
                 }
             ],
             "description": "Common Container Interface (PHP FIG PSR-11)",
@@ -302,7 +287,7 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/php-fig\/container\/issues",
-                "source": "https:\/\/github.com\/php-fig\/container\/tree\/master"
+                "source": "https:\/\/github.com\/php-fig\/container\/tree\/1.1.0"
             },
             "install-path": "..\/psr\/container"
         },
@@ -361,26 +346,26 @@
         },
         {
             "name": "sniccowp\/php-scoper-wordpress-excludes",
-            "version": "6.6.0",
-            "version_normalized": "6.6.0.0",
+            "version": "6.6.2",
+            "version_normalized": "6.6.2.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes.git",
-                "reference": "56cce0bed93ec18e04519de987f7bf78af5385c3"
+                "reference": "b87d7455bdf05c25f9a688fc3862bb3f2b7c8b15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/snicco\/php-scoper-wordpress-excludes\/zipball\/56cce0bed93ec18e04519de987f7bf78af5385c3",
-                "reference": "56cce0bed93ec18e04519de987f7bf78af5385c3",
+                "url": "https:\/\/api.github.com\/repos\/snicco\/php-scoper-wordpress-excludes\/zipball\/b87d7455bdf05c25f9a688fc3862bb3f2b7c8b15",
+                "reference": "b87d7455bdf05c25f9a688fc3862bb3f2b7c8b15",
                 "shasum": ""
             },
             "require-dev": {
                 "php": "^7.4",
                 "php-stubs\/wordpress-globals": "0.2.0",
-                "php-stubs\/wordpress-stubs": "6.6.0",
+                "php-stubs\/wordpress-stubs": "6.6.2",
                 "sniccowp\/php-scoper-excludes": "dev-master"
             },
-            "time": "2024-08-24T00:01:07+00:00",
+            "time": "2024-10-01T00:32:14+00:00",
             "type": "library",
             "installation-source": "dist",
             "notification-url": "https:\/\/packagist.org\/downloads\/",
@@ -405,7 +390,7 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes\/issues",
-                "source": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes\/tree\/6.6.0"
+                "source": "https:\/\/github.com\/snicco\/php-scoper-wordpress-excludes\/tree\/6.6.2"
             },
             "install-path": "..\/sniccowp\/php-scoper-wordpress-excludes"
         }

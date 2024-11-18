@@ -31,9 +31,8 @@ class ActivationModule implements ExecutableModule
     public function run(ContainerInterface $container): bool
     {
         add_action('init', [$this, 'pluginInit']);
+        add_action('admin_init', [$this, 'mollieWcNoticeApiKeyMissing']);
         $this->declareCompatibleWithHPOS();
-        $this->handleTranslations();
-        $this->mollieWcNoticeApiKeyMissing();
         $this->appleValidationFileRewriteRules();
         return \true;
     }
@@ -57,19 +56,6 @@ class ActivationModule implements ExecutableModule
                 array_pop($EZSQL_ERROR);
             }
             update_option(SharedDataDictionary::DB_VERSION_PARAM_NAME, SharedDataDictionary::DB_VERSION);
-        }
-    }
-    /**
-     *
-     */
-    public function handleTranslations(): void
-    {
-        add_action('upgrader_process_complete', 'mollieUpdateCompleted', 10, 2);
-        // we need to handle this version specifically, we can remove this on the next
-        $translationFlag = get_option('mollie_plugin_update_translation');
-        if ($translationFlag !== 'yes') {
-            mollieDeleteWPTranslationFiles();
-            update_option('mollie_plugin_update_translation', 'yes');
         }
     }
     /**

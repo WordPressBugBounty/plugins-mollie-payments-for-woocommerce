@@ -7,7 +7,7 @@ class Eps extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMethod imple
 {
     protected function getConfig(): array
     {
-        return ['id' => 'eps', 'defaultTitle' => __('EPS', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \true, 'SEPA' => \true];
+        return ['id' => 'eps', 'defaultTitle' => __('EPS', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \true, 'SEPA' => \true, 'docs' => 'https://www.mollie.com/gb/payments/eps'];
     }
     public function getFormFields($generalFormFields): array
     {

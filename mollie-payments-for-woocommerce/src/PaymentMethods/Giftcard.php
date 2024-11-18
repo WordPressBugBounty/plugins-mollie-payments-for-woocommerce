@@ -43,7 +43,7 @@ class Giftcard extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMethod 
     }
     protected function getConfig(): array
     {
-        return ['id' => 'giftcard', 'defaultTitle' => __('Gift cards', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => __('Select your gift card', 'mollie-payments-for-woocommerce'), 'paymentFields' => \true, 'instructions' => \false, 'supports' => ['products'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \false, 'SEPA' => \false];
+        return ['id' => 'giftcard', 'defaultTitle' => __('Gift cards', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => __('Select your gift card', 'mollie-payments-for-woocommerce'), 'paymentFields' => \true, 'instructions' => \false, 'supports' => ['products'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \false, 'SEPA' => \false, 'docs' => 'https://www.mollie.com/gb/payments/gift-cards'];
     }
     public function getFormFields($generalFormFields): array
     {

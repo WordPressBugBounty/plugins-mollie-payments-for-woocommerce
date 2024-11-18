@@ -44,7 +44,8 @@ final class MollieCheckoutBlocksSupport extends AbstractPaymentMethodType
     }
     public static function localizeWCBlocksData($dataService, $gatewayInstances)
     {
-        wp_localize_script(self::$scriptHandle, 'mollieBlockData', ['gatewayData' => self::gatewayDataForWCBlocks($dataService, $gatewayInstances)]);
+        wp_enqueue_style('mollie-applepaydirect');
+        wp_localize_script(self::$scriptHandle, 'mollieBlockData', ['gatewayData' => self::gatewayDataForWCBlocks($dataService, $gatewayInstances), 'mollieApplePayBlockDataCart' => $dataService->mollieApplePayBlockDataCart()]);
     }
     public static function gatewayDataForWCBlocks(Data $dataService, array $gatewayInstances): array
     {
@@ -71,28 +72,29 @@ final class MollieCheckoutBlocksSupport extends AbstractPaymentMethodType
         $isSepaEnabled = isset($gatewayInstances['mollie_wc_gateway_directdebit']) && $gatewayInstances['mollie_wc_gateway_directdebit']->enabled === 'yes';
         /** @var MolliePaymentGateway $gateway */
         foreach ($gatewayInstances as $gatewayKey => $gateway) {
-            $gatewayId = is_string($gateway->paymentMethod()->getProperty('id')) ? $gateway->paymentMethod()->getProperty('id') : "";
+            $method = $gateway->paymentMethod();
+            $gatewayId = is_string($method->getProperty('id')) ? $method->getProperty('id') : "";
             if ($gateway->enabled !== 'yes' || $gatewayId === 'directdebit' && !is_admin()) {
                 continue;
             }
-            $content = $gateway->paymentMethod()->getProcessedDescriptionForBlock();
+            $content = $method->getProcessedDescriptionForBlock();
             $issuers = \false;
-            if ($gateway->paymentMethod()->getProperty('paymentFields') === \true) {
-                $paymentFieldsService = $gateway->paymentMethod()->paymentFieldsService();
-                $paymentFieldsService->setStrategy($gateway->paymentMethod());
-                $issuers = $gateway->paymentMethod()->paymentFieldsService()->getStrategyMarkup($gateway);
+            if ($method->getProperty('paymentFields') === \true) {
+                $paymentFieldsService = $method->paymentFieldsService();
+                $paymentFieldsService->setStrategy($method);
+                $issuers = $method->paymentFieldsService()->getStrategyMarkup($gateway);
             }
             if ($gatewayId === 'creditcard') {
                 $content .= $issuers;
                 $issuers = \false;
             }
-            $title = $gateway->paymentMethod()->title();
+            $title = $method->title();
             $labelMarkup = "<span style='margin-right: 1em'>{$title}</span>{$gateway->icon}";
-            $hasSurcharge = $gateway->paymentMethod()->hasSurcharge();
+            $hasSurcharge = $method->hasSurcharge();
             $countryCodes = ['BE' => '+32xxxxxxxxx', 'NL' => '+316xxxxxxxx', 'DE' => '+49xxxxxxxxx', 'AT' => '+43xxxxxxxxx'];
             $country = WC()->customer ? WC()->customer->get_billing_country() : '';
             $phonePlaceholder = in_array($country, array_keys($countryCodes)) ? $countryCodes[$country] : $countryCodes['NL'];
-            $gatewayData[] = ['name' => $gatewayKey, 'label' => $labelMarkup, 'content' => $content, 'issuers' => $issuers, 'hasSurcharge' => $hasSurcharge, 'title' => $title, 'contentFallback' => __('Please choose a billing country to see the available payment methods', 'mollie-payments-for-woocommerce'), 'edit' => $content, 'paymentMethodId' => $gatewayKey, 'allowedCountries' => is_array($gateway->paymentMethod()->getProperty('allowed_countries')) ? $gateway->paymentMethod()->getProperty('allowed_countries') : [], 'ariaLabel' => $gateway->paymentMethod()->getProperty('defaultDescription'), 'supports' => self::gatewaySupportsFeatures($gateway->paymentMethod(), $isSepaEnabled), 'errorMessage' => $gateway->paymentMethod()->getProperty('errorMessage'), 'companyPlaceholder' => $gateway->paymentMethod()->getProperty('companyPlaceholder'), 'phoneLabel' => $gateway->paymentMethod()->getProperty('phoneLabel'), 'phonePlaceholder' => $phonePlaceholder, 'birthdatePlaceholder' => $gateway->paymentMethod()->getProperty('birthdatePlaceholder')];
+            $gatewayData[] = ['name' => $gatewayKey, 'label' => $labelMarkup, 'content' => $content, 'issuers' => $issuers, 'hasSurcharge' => $hasSurcharge, 'title' => $title, 'contentFallback' => __('Please choose a billing country to see the available payment methods', 'mollie-payments-for-woocommerce'), 'edit' => $content, 'paymentMethodId' => $gatewayKey, 'allowedCountries' => is_array($method->getProperty('allowed_countries')) ? $method->getProperty('allowed_countries') : [], 'ariaLabel' => $method->getProperty('defaultDescription'), 'supports' => self::gatewaySupportsFeatures($method, $isSepaEnabled), 'errorMessage' => $method->getProperty('errorMessage'), 'companyPlaceholder' => $method->getProperty('companyPlaceholder'), 'phoneLabel' => $method->getProperty('phoneLabel'), 'phonePlaceholder' => $phonePlaceholder, 'birthdatePlaceholder' => $method->getProperty('birthdatePlaceholder'), 'isExpressEnabled' => $gatewayId === 'applepay' && $method->getProperty('mollie_apple_pay_button_enabled_express_checkout') === 'yes'];
         }
         $dataToScript['gatewayData'] = $gatewayData;
         $dataToScript['availableGateways'] = $availablePaymentMethods;

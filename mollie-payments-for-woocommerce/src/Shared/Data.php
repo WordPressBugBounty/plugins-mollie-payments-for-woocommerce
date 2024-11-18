@@ -6,6 +6,7 @@ namespace Mollie\WooCommerce\Shared;
 use Exception;
 use InvalidArgumentException;
 use Mollie\Api\Resources\Method;
+use Mollie\WooCommerce\Buttons\ApplePayButton\DataToAppleButtonScripts;
 use Mollie\WooCommerce\SDK\Api;
 use Mollie\WooCommerce\Settings\Settings;
 use Mollie\Psr\Log\LoggerInterface as Logger;
@@ -92,9 +93,9 @@ class Data
     /**
      * @param bool $overrideTestMode
      *
-     * @return null|string
+     * @return false|string
      */
-    public function getApiKey($overrideTestMode = 2): ?string
+    public function getApiKey($overrideTestMode = 2)
     {
         return $this->settingsHelper->getApiKey($overrideTestMode);
     }
@@ -639,5 +640,10 @@ class Data
             }
         }
         return $result;
+    }
+    public function mollieApplePayBlockDataCart()
+    {
+        $dataToScripts = new DataToAppleButtonScripts();
+        return $dataToScripts->applePayScriptData(\true);
     }
 }

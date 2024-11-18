@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
+class ComposerStaticInitafd1fef3a31e6c8742cf9df94a0ca170
 {
     public static $prefixLengthsPsr4 = array (
         'M' => 
@@ -89,6 +89,7 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
         'Mollie\\Api\\Endpoints\\ProfileEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/ProfileEndpoint.php',
         'Mollie\\Api\\Endpoints\\ProfileMethodEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/ProfileMethodEndpoint.php',
         'Mollie\\Api\\Endpoints\\RefundEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/RefundEndpoint.php',
+        'Mollie\\Api\\Endpoints\\SessionEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/SessionEndpoint.php',
         'Mollie\\Api\\Endpoints\\SettlementCaptureEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/SettlementCaptureEndpoint.php',
         'Mollie\\Api\\Endpoints\\SettlementChargebackEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/SettlementChargebackEndpoint.php',
         'Mollie\\Api\\Endpoints\\SettlementPaymentEndpoint' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Endpoints/SettlementPaymentEndpoint.php',
@@ -132,6 +133,7 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
         'Mollie\\Api\\Resources\\CursorCollection' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/CursorCollection.php',
         'Mollie\\Api\\Resources\\Customer' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Customer.php',
         'Mollie\\Api\\Resources\\CustomerCollection' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/CustomerCollection.php',
+        'Mollie\\Api\\Resources\\HasPresetOptions' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/HasPresetOptions.php',
         'Mollie\\Api\\Resources\\Invoice' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Invoice.php',
         'Mollie\\Api\\Resources\\InvoiceCollection' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/InvoiceCollection.php',
         'Mollie\\Api\\Resources\\Issuer' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Issuer.php',
@@ -164,6 +166,8 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
         'Mollie\\Api\\Resources\\ResourceFactory' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/ResourceFactory.php',
         'Mollie\\Api\\Resources\\Route' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Route.php',
         'Mollie\\Api\\Resources\\RouteCollection' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/RouteCollection.php',
+        'Mollie\\Api\\Resources\\Session' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Session.php',
+        'Mollie\\Api\\Resources\\SessionCollection' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/SessionCollection.php',
         'Mollie\\Api\\Resources\\Settlement' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Settlement.php',
         'Mollie\\Api\\Resources\\SettlementCollection' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/SettlementCollection.php',
         'Mollie\\Api\\Resources\\Shipment' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Resources/Shipment.php',
@@ -188,6 +192,7 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
         'Mollie\\Api\\Types\\ProfileStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/ProfileStatus.php',
         'Mollie\\Api\\Types\\RefundStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/RefundStatus.php',
         'Mollie\\Api\\Types\\SequenceType' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SequenceType.php',
+        'Mollie\\Api\\Types\\SessionStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SessionStatus.php',
         'Mollie\\Api\\Types\\SettlementStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SettlementStatus.php',
         'Mollie\\Api\\Types\\SubscriptionStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/SubscriptionStatus.php',
         'Mollie\\Api\\Types\\TerminalStatus' => __DIR__ . '/..' . '/mollie/mollie-api-php/src/Types/TerminalStatus.php',
@@ -206,6 +211,7 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
         'Mollie\\Inpsyde\\Modularity\\Container\\ContainerConfigurator' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/ContainerConfigurator.php',
         'Mollie\\Inpsyde\\Modularity\\Container\\PackageProxyContainer' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/PackageProxyContainer.php',
         'Mollie\\Inpsyde\\Modularity\\Container\\ReadOnlyContainer' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/ReadOnlyContainer.php',
+        'Mollie\\Inpsyde\\Modularity\\Container\\ServiceExtensions' => __DIR__ . '/..' . '/inpsyde/modularity/src/Container/ServiceExtensions.php',
         'Mollie\\Inpsyde\\Modularity\\Module\\ExecutableModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/ExecutableModule.php',
         'Mollie\\Inpsyde\\Modularity\\Module\\ExtendingModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/ExtendingModule.php',
         'Mollie\\Inpsyde\\Modularity\\Module\\FactoryModule' => __DIR__ . '/..' . '/inpsyde/modularity/src/Module/FactoryModule.php',
@@ -366,8 +372,23 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
         'Mollie\\WooCommerce\\SDK\\WordPressHttpAdapter' => __DIR__ . '/../..' . '/src/SDK/WordPressHttpAdapter.php',
         'Mollie\\WooCommerce\\SDK\\WordPressHttpAdapterPicker' => __DIR__ . '/../..' . '/src/SDK/WordPressHttpAdapterPicker.php',
         'Mollie\\WooCommerce\\Settings\\General\\MollieGeneralSettings' => __DIR__ . '/../..' . '/src/Settings/General/MollieGeneralSettings.php',
-        'Mollie\\WooCommerce\\Settings\\Page\\Components' => __DIR__ . '/../..' . '/src/Settings/Page/Components.php',
-        'Mollie\\WooCommerce\\Settings\\Page\\MollieSettingsPage' => __DIR__ . '/../..' . '/src/Settings/Page/MollieSettingsPage.php',
+        'Mollie\\WooCommerce\\Settings\\MollieSettingsPage' => __DIR__ . '/../..' . '/src/Settings/MollieSettingsPage.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\AbstractPage' => __DIR__ . '/../..' . '/src/Settings/Page/AbstractPage.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\PageAdvancedSettings' => __DIR__ . '/../..' . '/src/Settings/Page/PageAdvancedSettings.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\PageApiKeys' => __DIR__ . '/../..' . '/src/Settings/Page/PageApiKeys.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\PageNoApiKey' => __DIR__ . '/../..' . '/src/Settings/Page/PageNoApiKey.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\PagePaymentMethods' => __DIR__ . '/../..' . '/src/Settings/Page/PagePaymentMethods.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\AbstractSection' => __DIR__ . '/../..' . '/src/Settings/Page/Section/AbstractSection.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\Advanced' => __DIR__ . '/../..' . '/src/Settings/Page/Section/Advanced.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\ConnectionFields' => __DIR__ . '/../..' . '/src/Settings/Page/Section/ConnectionFields.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\ConnectionStatusFields' => __DIR__ . '/../..' . '/src/Settings/Page/Section/ConnectionStatusFields.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\ConnectionStatusTrait' => __DIR__ . '/../..' . '/src/Settings/Page/Section/ConnectionStatusTrait.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\Header' => __DIR__ . '/../..' . '/src/Settings/Page/Section/Header.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\InstructionsConnected' => __DIR__ . '/../..' . '/src/Settings/Page/Section/InstructionsConnected.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\InstructionsNotConnected' => __DIR__ . '/../..' . '/src/Settings/Page/Section/InstructionsNotConnected.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\Notices' => __DIR__ . '/../..' . '/src/Settings/Page/Section/Notices.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\PaymentMethods' => __DIR__ . '/../..' . '/src/Settings/Page/Section/PaymentMethods.php',
+        'Mollie\\WooCommerce\\Settings\\Page\\Section\\Tabs' => __DIR__ . '/../..' . '/src/Settings/Page/Section/Tabs.php',
         'Mollie\\WooCommerce\\Settings\\Settings' => __DIR__ . '/../..' . '/src/Settings/Settings.php',
         'Mollie\\WooCommerce\\Settings\\SettingsComponents' => __DIR__ . '/../..' . '/src/Settings/SettingsComponents.php',
         'Mollie\\WooCommerce\\Settings\\SettingsModule' => __DIR__ . '/../..' . '/src/Settings/SettingsModule.php',
@@ -388,9 +409,9 @@ class ComposerStaticInit5f1bf284400400658f0a0ca705864ad3
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit5f1bf284400400658f0a0ca705864ad3::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit5f1bf284400400658f0a0ca705864ad3::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit5f1bf284400400658f0a0ca705864ad3::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitafd1fef3a31e6c8742cf9df94a0ca170::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitafd1fef3a31e6c8742cf9df94a0ca170::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitafd1fef3a31e6c8742cf9df94a0ca170::$classMap;
 
         }, null, ClassLoader::class);
     }

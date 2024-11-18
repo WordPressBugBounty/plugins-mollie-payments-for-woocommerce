@@ -7,7 +7,7 @@ class Giropay extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMethod i
 {
     protected function getConfig(): array
     {
-        return ['id' => 'giropay', 'defaultTitle' => __('Giropay', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \true, 'SEPA' => \true];
+        return ['id' => 'giropay', 'defaultTitle' => __('Giropay', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \false, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \false, 'confirmationDelayed' => \true, 'SEPA' => \true, 'docs' => 'https://help.mollie.com/hc/en-gb/articles/19745480480786-Giropay-Depreciation-FAQ'];
     }
     public function getFormFields($generalFormFields): array
     {

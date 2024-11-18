@@ -65,15 +65,34 @@ class ResponsesToApple
      *
      * @return array
      */
-    public function appleFormattedResponse(array $paymentDetails)
+    public function appleFormattedResponse(array $paymentDetails, $applePayRequestDataObject)
     {
         $response = [];
         if ($paymentDetails['shippingMethods']) {
-            $response['newShippingMethods'] = $paymentDetails['shippingMethods'];
+            $selectedShippingMethod = $applePayRequestDataObject->shippingMethod();
+            $response['newShippingMethods'] = $this->reorderShippingMethods($paymentDetails['shippingMethods'], $selectedShippingMethod);
         }
         $response['newLineItems'] = $this->appleNewLineItemsResponse($paymentDetails);
         $response['newTotal'] = $this->appleNewTotalResponse($paymentDetails['total']);
         return $response;
+    }
+    /**
+     * Reorders the shipping methods to have the selected shipping method on top so we see it as selected
+     * @param array $methods
+     * @param array $selectedShippingMethod
+     * @return array
+     */
+    private function reorderShippingMethods(array $methods, array $selectedShippingMethod): array
+    {
+        $reordered_methods = [];
+        foreach ($methods as $key => $method) {
+            if ($method['identifier'] === $selectedShippingMethod['identifier']) {
+                $reordered_methods[] = $method;
+                unset($methods[$key]);
+                break;
+            }
+        }
+        return array_merge($reordered_methods, array_values($methods));
     }
     /**
      * Returns a success response to be handled by the script

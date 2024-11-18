@@ -24,7 +24,7 @@ class Banktransfer extends \Mollie\WooCommerce\PaymentMethods\AbstractPaymentMet
     public const EXPIRY_DAYS_OPTION = 'order_dueDate';
     protected function getConfig(): array
     {
-        return ['id' => 'banktransfer', 'defaultTitle' => __('Bank Transfer', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \true, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \true, 'confirmationDelayed' => \true, 'SEPA' => \false, 'customRedirect' => \true];
+        return ['id' => 'banktransfer', 'defaultTitle' => __('Bank Transfer', 'mollie-payments-for-woocommerce'), 'settingsDescription' => '', 'defaultDescription' => '', 'paymentFields' => \false, 'instructions' => \true, 'supports' => ['products', 'refunds'], 'filtersOnBuild' => \true, 'confirmationDelayed' => \true, 'SEPA' => \false, 'customRedirect' => \true, 'docs' => 'https://www.mollie.com/gb/payments/bank-transfer'];
     }
     public function getFormFields($generalFormFields): array
     {
