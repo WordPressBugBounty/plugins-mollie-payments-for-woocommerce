@@ -7,6 +7,7 @@ use Mollie\WooCommerce\PaymentMethods\Voucher;
 use Mollie\WooCommerce\Shared\Data;
 use WC_Order;
 use WC_Order_Item;
+use WC_Order_Item_Fee;
 use WC_Tax;
 class PaymentLines
 {
@@ -108,7 +109,7 @@ class PaymentLines
                 $mollie_order_item = ['sku' => $this->get_item_reference($product), 'type' => $product->is_virtual() ? 'digital' : 'physical', 'description' => $this->get_item_name($cart_item), 'quantity' => $this->get_item_quantity($cart_item), 'vatRate' => round($this->get_item_vatRate($cart_item, $product), 2), 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_price($cart_item), $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_total_amount($cart_item), $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_tax_amount($cart_item), $this->currency)], 'discountAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_discount_amount($cart_item), $this->currency)], 'productUrl' => $product->get_permalink()];
                 if ($product->get_image_id()) {
                     $productImage = wp_get_attachment_image_src($product->get_image_id(), 'full');
-                    if (isset($productImage[0])) {
+                    if (isset($productImage[0]) && wc_is_valid_url($productImage[0])) {
                         $mollie_order_item['imageUrl'] = $productImage[0];
                     }
                 }
@@ -141,6 +142,7 @@ class PaymentLines
     {
         if (!empty($this->order->get_items('fee'))) {
             foreach ($this->order->get_items('fee') as $cart_fee) {
+                assert($cart_fee instanceof WC_Order_Item_Fee);
                 if ($cart_fee['tax_status'] === 'taxable') {
                     // Calculate tax rate.
                     $tmp_rates = WC_Tax::get_rates($cart_fee['tax_class']);
@@ -160,7 +162,7 @@ class PaymentLines
                     $cart_fee_tax_amount = 0;
                     $cart_fee_total = $cart_fee['total'];
                 }
-                $fee = ['type' => 'surcharge', 'description' => $cart_fee['name'], 'quantity' => 1, 'vatRate' => $this->dataHelper->formatCurrencyValue($cart_fee_vat_rate, $this->currency), 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_tax_amount, $this->currency)]];
+                $fee = ['type' => $cart_fee_total > 0 ? 'surcharge' : 'discount', 'description' => $cart_fee['name'], 'quantity' => 1, 'vatRate' => $this->dataHelper->formatCurrencyValue($cart_fee_vat_rate, $this->currency), 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_tax_amount, $this->currency)]];
                 $this->order_lines[] = $fee;
             }
             // End foreach().

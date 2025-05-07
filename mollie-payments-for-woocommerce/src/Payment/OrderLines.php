@@ -108,7 +108,7 @@ class OrderLines
                 $mollie_order_item = ['sku' => $this->get_item_reference($product), 'type' => $product->is_virtual() ? 'digital' : 'physical', 'name' => $this->get_item_name($cart_item), 'quantity' => $this->get_item_quantity($cart_item), 'vatRate' => round($this->get_item_vatRate($cart_item, $product), 2), 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_price($cart_item), $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_total_amount($cart_item), $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_tax_amount($cart_item), $this->currency)], 'discountAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($this->get_item_discount_amount($cart_item), $this->currency)], 'metadata' => ['order_item_id' => $cart_item->get_id()], 'productUrl' => $product->get_permalink()];
                 if ($product->get_image_id()) {
                     $productImage = wp_get_attachment_image_src($product->get_image_id(), 'full');
-                    if (isset($productImage[0])) {
+                    if (isset($productImage[0]) && wc_is_valid_url($productImage[0])) {
                         $mollie_order_item['imageUrl'] = $productImage[0];
                     }
                 }
@@ -160,7 +160,7 @@ class OrderLines
                     $cart_fee_tax_amount = 0;
                     $cart_fee_total = $cart_fee['total'];
                 }
-                $fee = ['type' => 'surcharge', 'name' => $cart_fee['name'], 'quantity' => 1, 'vatRate' => $this->dataHelper->formatCurrencyValue($cart_fee_vat_rate, $this->currency), 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_tax_amount, $this->currency)], 'metadata' => ['order_item_id' => $cart_fee->get_id()]];
+                $fee = ['type' => $cart_fee_total > 0 ? 'surcharge' : 'discount', 'name' => $cart_fee['name'], 'quantity' => 1, 'vatRate' => $this->dataHelper->formatCurrencyValue($cart_fee_vat_rate, $this->currency), 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_total, $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($cart_fee_tax_amount, $this->currency)], 'metadata' => ['order_item_id' => $cart_fee->get_id()]];
                 $this->order_lines[] = $fee;
             }
             // End foreach().
