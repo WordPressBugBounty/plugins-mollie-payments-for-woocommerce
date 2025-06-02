@@ -315,7 +315,6 @@ class ComposerStaticInitb1e8936703aa6cff296fa891dd9ccf25
         'Mollie\\WooCommerce\\Gateway\\DeprecatedGatewayBuilder' => __DIR__ . '/../..' . '/src/Gateway/DeprecatedGatewayBuilder.php',
         'Mollie\\WooCommerce\\Gateway\\GatewayModule' => __DIR__ . '/../..' . '/src/Gateway/GatewayModule.php',
         'Mollie\\WooCommerce\\Gateway\\MolliePaymentGatewayHandler' => __DIR__ . '/../..' . '/src/Gateway/MolliePaymentGatewayHandler.php',
-        'Mollie\\WooCommerce\\Gateway\\OrderMandatoryGatewayDisabler' => __DIR__ . '/../..' . '/src/Gateway/OrderMandatoryGatewayDisabler.php',
         'Mollie\\WooCommerce\\Gateway\\Refund\\OrderItemsRefunder' => __DIR__ . '/../..' . '/src/Gateway/Refund/OrderItemsRefunder.php',
         'Mollie\\WooCommerce\\Gateway\\Refund\\OrderLineStatus' => __DIR__ . '/../..' . '/src/Gateway/Refund/OrderLineStatus.php',
         'Mollie\\WooCommerce\\Gateway\\Refund\\PartialRefundException' => __DIR__ . '/../..' . '/src/Gateway/Refund/PartialRefundException.php',

@@ -101,7 +101,7 @@ class MollieSepaRecurringGatewayHandler extends \Mollie\WooCommerce\Subscription
      */
     protected function getPaymentMethodTitle($payment)
     {
-        $payment_method_title = $this->method_title;
+        $payment_method_title = $this->paymentMethod->getProperty('title');
         $orderId = isset($payment->metadata) ? $payment->metadata->order_id : \false;
         if ($orderId && $this->dataService->isWcSubscription($orderId) && $payment->method === $this->getRecurringMollieMethodId()) {
             $payment_method_title = $this->getRecurringMollieMethodTitle();

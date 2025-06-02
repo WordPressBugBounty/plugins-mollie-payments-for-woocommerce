@@ -257,7 +257,6 @@ return array(
     'Mollie\\WooCommerce\\Gateway\\DeprecatedGatewayBuilder' => $baseDir . '/src/Gateway/DeprecatedGatewayBuilder.php',
     'Mollie\\WooCommerce\\Gateway\\GatewayModule' => $baseDir . '/src/Gateway/GatewayModule.php',
     'Mollie\\WooCommerce\\Gateway\\MolliePaymentGatewayHandler' => $baseDir . '/src/Gateway/MolliePaymentGatewayHandler.php',
-    'Mollie\\WooCommerce\\Gateway\\OrderMandatoryGatewayDisabler' => $baseDir . '/src/Gateway/OrderMandatoryGatewayDisabler.php',
     'Mollie\\WooCommerce\\Gateway\\Refund\\OrderItemsRefunder' => $baseDir . '/src/Gateway/Refund/OrderItemsRefunder.php',
     'Mollie\\WooCommerce\\Gateway\\Refund\\OrderLineStatus' => $baseDir . '/src/Gateway/Refund/OrderLineStatus.php',
     'Mollie\\WooCommerce\\Gateway\\Refund\\PartialRefundException' => $baseDir . '/src/Gateway/Refund/PartialRefundException.php',
