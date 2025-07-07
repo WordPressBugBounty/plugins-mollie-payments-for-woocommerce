@@ -39,9 +39,13 @@ class GatewaySurchargeHandler
     }
     public function setHiddenOrderId($item_id, $item, $order, $bool = \false)
     {
+        $nonce = wp_create_nonce('mollie_surcharge_' . $order->get_id());
         ?>
         <input type="hidden" name="mollie-woocommerce-orderId" value="<?php 
         echo esc_attr($order->get_id());
+        ?>">
+        <input type="hidden" name="mollie-surcharge-nonce" value="<?php 
+        echo esc_attr($nonce);
         ?>">
         <?php 
     }
@@ -74,9 +78,15 @@ class GatewaySurchargeHandler
     }
     public function updateSurchargeOrderPay()
     {
+        if (!$this->verifyNonce()) {
+            return;
+        }
         $order = $this->canProcessOrder();
+        if (!$order) {
+            return;
+        }
         $gatewayName = $this->canProcessGateway();
-        if (!$order || !$gatewayName) {
+        if (!$gatewayName) {
             return;
         }
         $this->orderRemoveFee($order);
@@ -88,6 +98,7 @@ class GatewaySurchargeHandler
         if (!isset($gatewaySettings['payment_surcharge']) || $gatewaySettings['payment_surcharge'] === Surcharge::NO_FEE) {
             $data = ['amount' => \false, 'currency' => get_woocommerce_currency_symbol(), 'newTotal' => $order->get_total()];
             wp_send_json_success($data);
+            return;
         }
         $amount = $this->surcharge->calculateFeeAmountOrder($order, $gatewaySettings);
         if ($amount > 0) {
@@ -125,6 +136,18 @@ class GatewaySurchargeHandler
         }
         $amount = $this->surcharge->calculateFeeAmount($cart, $gatewaySettings);
         $cart->add_fee($this->gatewayFeeLabel, $amount, \true, 'standard');
+    }
+    /**
+     * Verify nonce for surcharge operations
+     */
+    protected function verifyNonce(): bool
+    {
+        $orderId = (int) wc_get_post_data_by_key('orderId', '');
+        $nonce = wc_get_post_data_by_key('nonce', '');
+        if (!$orderId || !$nonce) {
+            return \false;
+        }
+        return (bool) wp_verify_nonce($nonce, 'mollie_surcharge_' . $orderId);
     }
     protected function chosenGateway()
     {
@@ -177,14 +200,16 @@ class GatewaySurchargeHandler
         $order->add_item($item_fee);
         $order->calculate_totals();
     }
+    /**
+     * Get and validate order with order key verification
+     */
     protected function canProcessOrder()
     {
-        $postedOrderId = filter_input(\INPUT_POST, 'orderId', \FILTER_SANITIZE_NUMBER_INT);
-        $orderId = !empty($postedOrderId) ? $postedOrderId : \false;
-        if (!$orderId) {
+        $postedOrderId = (int) wc_get_post_data_by_key('orderId', '');
+        if (!$postedOrderId) {
             return \false;
         }
-        $order = wc_get_order($orderId);
+        $order = wc_get_order($postedOrderId);
         if (!$order) {
             return \false;
         }
