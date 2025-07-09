@@ -139,7 +139,7 @@ class OrderLines
                 if ($shipping_method->get_total_tax() > 0 && $shipping_method->get_total() > 0) {
                     $vatRate = round($shipping_method->get_total_tax() / $shipping_method->get_total(), 4) * 100;
                 }
-                $shipping = ['type' => 'shipping_fee', 'description' => $shipping_method->get_name() ?: __('Shipping', 'mollie-payments-for-woocommerce'), 'quantity' => 1, 'vatRate' => $vatRate, 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($shipping_method->get_total() + $shipping_method->get_total_tax(), $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($shipping_method->get_total() + $shipping_method->get_total_tax(), $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($shipping_method->get_total_tax(), $this->currency)]];
+                $shipping = ['type' => 'shipping_fee', 'name' => $shipping_method->get_name() ?: __('Shipping', 'mollie-payments-for-woocommerce'), 'quantity' => 1, 'vatRate' => $vatRate, 'unitPrice' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($shipping_method->get_total() + $shipping_method->get_total_tax(), $this->currency)], 'totalAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($shipping_method->get_total() + $shipping_method->get_total_tax(), $this->currency)], 'vatAmount' => ['currency' => $this->currency, 'value' => $this->dataHelper->formatCurrencyValue($shipping_method->get_total_tax(), $this->currency)]];
                 $this->order_lines[] = $shipping;
             }
         }
