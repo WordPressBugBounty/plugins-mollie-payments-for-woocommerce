@@ -7,6 +7,7 @@ namespace Mollie\WooCommerce\Settings;
 use Mollie\WooCommerce\Notice\AdminNotice;
 use Mollie\WooCommerce\PaymentMethods\Constants;
 use Mollie\WooCommerce\SDK\Api;
+use Mollie\WooCommerce\Settings\Webhooks\WebhookTestService;
 use Mollie\WooCommerce\Shared\Data;
 use Mollie\WooCommerce\Shared\Status;
 use Mollie\WooCommerce\Uninstall\CleanDb;
@@ -37,51 +38,72 @@ class SettingsModule implements ServiceModule, ExecutableModule
     protected $isTestNoticePrinted;
     public function services(): array
     {
-        return ['settings.settings_helper' => static function (ContainerInterface $container): \Mollie\WooCommerce\Settings\Settings {
-            $pluginId = $container->get('shared.plugin_id');
-            $pluginUrl = $container->get('shared.plugin_url');
-            $statusHelper = $container->get('shared.status_helper');
-            assert($statusHelper instanceof Status);
-            $pluginVersion = $container->get('shared.plugin_version');
-            $apiHelper = $container->get('SDK.api_helper');
-            assert($apiHelper instanceof Api);
-            $cleanDb = $container->get(CleanDb::class);
-            assert($cleanDb instanceof CleanDb);
-            return new \Mollie\WooCommerce\Settings\Settings($pluginId, $statusHelper, $pluginVersion, $pluginUrl, $apiHelper, $cleanDb);
-        }, 'settings.data_helper' => static function (ContainerInterface $container): Data {
-            $apiHelper = $container->get('SDK.api_helper');
-            assert($apiHelper instanceof Api);
-            $logger = $container->get(Logger::class);
-            assert($logger instanceof Logger);
-            $pluginId = $container->get('shared.plugin_id');
-            $pluginPath = $container->get('shared.plugin_path');
-            $settings = $container->get('settings.settings_helper');
-            assert($settings instanceof \Mollie\WooCommerce\Settings\Settings);
-            return new Data($apiHelper, $logger, $pluginId, $settings, $pluginPath);
-        }, 'settings.IsTestModeEnabled' => static function (ContainerInterface $container): bool {
-            $settingsHelper = $container->get('settings.settings_helper');
-            assert($settingsHelper instanceof \Mollie\WooCommerce\Settings\Settings);
-            return $settingsHelper->isTestModeEnabled();
-        }, 'settings.IsDebugEnabled' => static function (): bool {
-            $debugEnabled = get_option('mollie-payments-for-woocommerce_debug', 'yes');
-            return $debugEnabled === 'yes';
-        }, 'settings.advanced_default_options' => static function (ContainerInterface $container) {
-            $pluginPath = $container->get('shared.plugin_path');
-            $advancedSettingsFilePath = $pluginPath . 'inc/settings/mollie_advanced_settings.php';
-            if (!file_exists($advancedSettingsFilePath)) {
-                return [];
-            }
-            return include $advancedSettingsFilePath;
-        }, 'settings.components_default_options' => static function (ContainerInterface $container) {
-            $pluginPath = $container->get('shared.plugin_path');
-            $componentsSettingsFilePath = $pluginPath . 'inc/settings/mollie_components.php';
-            if (!file_exists($componentsSettingsFilePath)) {
-                return [];
-            }
-            return include $componentsSettingsFilePath;
-        }, 'settings.option_name' => static function () {
-            return 'mollie-payments-for-woocommerce_';
-        }];
+        return [
+            'settings.settings_helper' => static function (ContainerInterface $container): \Mollie\WooCommerce\Settings\Settings {
+                $pluginId = $container->get('shared.plugin_id');
+                $pluginUrl = $container->get('shared.plugin_url');
+                $statusHelper = $container->get('shared.status_helper');
+                assert($statusHelper instanceof Status);
+                $pluginVersion = $container->get('shared.plugin_version');
+                $apiHelper = $container->get('SDK.api_helper');
+                assert($apiHelper instanceof Api);
+                $cleanDb = $container->get(CleanDb::class);
+                assert($cleanDb instanceof CleanDb);
+                return new \Mollie\WooCommerce\Settings\Settings($pluginId, $statusHelper, $pluginVersion, $pluginUrl, $apiHelper, $cleanDb);
+            },
+            'settings.data_helper' => static function (ContainerInterface $container): Data {
+                $apiHelper = $container->get('SDK.api_helper');
+                assert($apiHelper instanceof Api);
+                $logger = $container->get(Logger::class);
+                assert($logger instanceof Logger);
+                $pluginId = $container->get('shared.plugin_id');
+                $pluginPath = $container->get('shared.plugin_path');
+                $settings = $container->get('settings.settings_helper');
+                assert($settings instanceof \Mollie\WooCommerce\Settings\Settings);
+                return new Data($apiHelper, $logger, $pluginId, $settings, $pluginPath);
+            },
+            'settings.IsTestModeEnabled' => static function (ContainerInterface $container): bool {
+                $settingsHelper = $container->get('settings.settings_helper');
+                assert($settingsHelper instanceof \Mollie\WooCommerce\Settings\Settings);
+                return $settingsHelper->isTestModeEnabled();
+            },
+            'settings.IsDebugEnabled' => static function (): bool {
+                $debugEnabled = get_option('mollie-payments-for-woocommerce_debug', 'yes');
+                return $debugEnabled === 'yes';
+            },
+            'settings.advanced_default_options' => static function (ContainerInterface $container) {
+                $pluginPath = $container->get('shared.plugin_path');
+                $advancedSettingsFilePath = $pluginPath . 'inc/settings/mollie_advanced_settings.php';
+                if (!file_exists($advancedSettingsFilePath)) {
+                    return [];
+                }
+                return include $advancedSettingsFilePath;
+            },
+            'settings.components_default_options' => static function (ContainerInterface $container) {
+                $pluginPath = $container->get('shared.plugin_path');
+                $componentsSettingsFilePath = $pluginPath . 'inc/settings/mollie_components.php';
+                if (!file_exists($componentsSettingsFilePath)) {
+                    return [];
+                }
+                return include $componentsSettingsFilePath;
+            },
+            'settings.option_name' => static function () {
+                return 'mollie-payments-for-woocommerce_';
+            },
+            /**
+             * Webhook Test Service
+             * Handles webhook connection testing functionality
+             */
+            WebhookTestService::class => static function (ContainerInterface $container): WebhookTestService {
+                $apiHelper = $container->get('SDK.api_helper');
+                assert($apiHelper instanceof Api);
+                $settingsHelper = $container->get('settings.settings_helper');
+                assert($settingsHelper instanceof \Mollie\WooCommerce\Settings\Settings);
+                $logger = $container->get(Logger::class);
+                assert($logger instanceof Logger);
+                return new WebhookTestService($apiHelper, $settingsHelper, $logger);
+            },
+        ];
     }
     public function run(ContainerInterface $container): bool
     {
@@ -105,19 +127,20 @@ class SettingsModule implements ServiceModule, ExecutableModule
             if ($domain !== 'mollie-payments-for-woocommerce') {
                 return $translated;
             }
-            if ($text !== "Sign up for a <a href='%s' target='_blank'>Free Mollie Account</a> if you don't have one yet.") {
+            if ($text !== "Don’t have a Mollie account yet? <a href='%s' target='_blank'>Get started with Mollie today.</a>") {
                 return $translated;
             }
             return __('Don’t have a Mollie account yet? Create one now. Limited time only! Pay ZERO processing fees for your first month. <a href="%s" target="_blank">Get started with Mollie today.</a> ', 'mollie-payments-for-woocommerce');
         }, 10, 3);
-        add_filter('mollie-payments-for-woocommerce_signup_url', static function ($url) {
-            $dateNow = new \DateTime();
-            $endDateCampaign = new \DateTime('2025-12-10');
-            if ($endDateCampaign < $dateNow) {
-                return $url;
-            }
-            return 'https://my.mollie.com/dashboard/signup/campaign/woocommerce2025?utm_campaign=GLO_Q3__Co-Marketing-Campaign-WooCommerce&utm_medium=referral&utm_source=dashboard&utm_content=woo_mollie_dash&sf_campaign_id=701QD00000iR21IYAS&campaign_name=GLO_Q3__Co-Marketing-Campaign-WooCommerce';
-        });
+        /*add_filter('mollie-payments-for-woocommerce_signup_url', static function ($url) {
+                    $dateNow = new \DateTime();
+                    $endDateCampaign = new \DateTime('2026-01-01');
+                    if ($endDateCampaign < $dateNow) {
+                        return $url;
+                    }
+        
+                    return 'https://my.mollie.com/dashboard/signup?utm_campaign=GLO_Q4__Woo-Signup-tracker&utm_medium=referral&utm_source={woodashboard}&campaign_name=GLO_Q4__Woo-Signup-tracker';
+                });*/
         //init settings with advanced and components defaults if not exists
         $optionName = $container->get('settings.option_name');
         $defaultAdvancedOptions = $container->get('settings.advanced_default_options');
@@ -164,6 +187,9 @@ class SettingsModule implements ServiceModule, ExecutableModule
                 $this->dataHelper->getAllPaymentMethods($value, \true, \false);
             }
         }, 10, 3);
+        $webhookTestService = $container->get(WebhookTestService::class);
+        assert($webhookTestService instanceof WebhookTestService);
+        $webhookTestService->registerAjaxHandlers();
         return \true;
     }
     /**
