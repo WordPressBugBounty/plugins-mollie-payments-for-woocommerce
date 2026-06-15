@@ -2,8 +2,8 @@
 Contributors: daanvm, danielhuesken, davdebcom, dinamiko, syde, l.vangunst, ndijkstra, wido, carmen222
 Tags: mollie, woocommerce, payments, ecommerce, credit card
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 8.1.6
+Tested up to: 7.0
+Stable tag: 8.1.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -217,6 +217,22 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 
 == Changelog ==
+
+= 8.1.7 - 15-06-2026 =
+* Fixed - Error exporting invoices in WooCommerce
+* Fixed - Undefined array key warning in Mollie PayPal button due to malformed color setting
+* Fixed - PHP warning caused by missing value key in payment_data array in WooCommerce Store API checkout
+* Fixed - Duplicate payments for the same order
+* Fixed - WordPress Playground (SQLite) causes plugin activation issue
+* Fixed - Undefined array key hide_order_lines in OrderLinesMiddleware for payment methods without setting field
+* Fixed - Replace orderId with orderKey in surcharge processing logic
+* Fixed - API key retrieval broken due to Mollie dashboard change breaking in-plugin guidance (with @fjbender)
+* Fixed - Expired webhook for stale transaction cancels order despite subsequent payment attempts
+* Fixed - Credit card fields with no margin
+* Improvement - Simplified WooCommerce payment title and logo settings
+* Improvement - Added file type validation for custom gateway logo uploads
+* Improvement - Tightened ownership and type checks for Mollie gateway objects
+
 
 = 8.1.6 - 20-04-2026 =
 * Added - Hide order lines setting for payments API in gateways

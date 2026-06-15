@@ -41,6 +41,14 @@ abstract class AbstractPaymentMethod implements \Mollie\WooCommerce\PaymentMetho
      * @var bool
      */
     protected bool $translationsInitialized = \false;
+    abstract protected function getConfig(): array;
+    abstract public function getFormFields(array $generalFormFields): array;
+    public function filtersOnBuild(): void
+    {
+    }
+    public function debugGiftcardDetails($payment, \WC_Order $order): void
+    {
+    }
     public function __construct()
     {
         $this->config = $this->getConfig();
@@ -49,13 +57,13 @@ abstract class AbstractPaymentMethod implements \Mollie\WooCommerce\PaymentMetho
     }
     public function title(ContainerInterface $container): string
     {
-        $useApiTitle = apply_filters('mollie_wc_gateway_use_api_title', $this->isUseApiTitleChecked(), $this->getIdFromConfig());
         $title = $this->getProperty('title');
-        //new installations should use the api title
-        if ($useApiTitle || $title === \false) {
-            return $this->getApiTitle($container);
+        // Filter deprecated in 8.1.7 — remove in next major version.
+        if (has_filter('mollie_wc_gateway_use_api_title')) {
+            _doing_it_wrong('mollie_wc_gateway_use_api_title', 'This filter is deprecated. Title is now determined by whether the title field is empty.', '8.1.7');
         }
-        return $title;
+        $useApiTitle = apply_filters('mollie_wc_gateway_use_api_title', empty($title), $this->getIdFromConfig());
+        return $useApiTitle ? $this->getApiTitle($container) : (string) $title;
     }
     /**
      * Payment method id accessor
@@ -230,10 +238,6 @@ abstract class AbstractPaymentMethod implements \Mollie\WooCommerce\PaymentMetho
         }
         return $apiIcon;
     }
-    private function isUseApiTitleChecked(): bool
-    {
-        return $this->getProperty(SharedDataDictionary::USE_API_TITLE_AND_IMAGE) === 'yes';
-    }
     protected function titleIsDefault(): bool
     {
         $savedTitle = $this->getProperty('title');
@@ -306,7 +310,11 @@ abstract class AbstractPaymentMethod implements \Mollie\WooCommerce\PaymentMetho
         if ($this->getUploadedImage()) {
             $iconUrlArray = $this->getUploadedImage();
         }
-        $useAPIImage = apply_filters('mollie_wc_gateway_use_api_icon', $this->isUseApiTitleChecked(), $this->getIdFromConfig());
+        // Filter deprecated in 8.1.7 — remove in next major version.
+        if (has_filter('mollie_wc_gateway_use_api_icon')) {
+            _doing_it_wrong('mollie_wc_gateway_use_api_icon', 'This filter is deprecated. Icon source is now determined by whether a custom logo has been uploaded.', '8.1.7');
+        }
+        $useAPIImage = apply_filters('mollie_wc_gateway_use_api_icon', empty($this->getUploadedImage()), $this->getIdFromConfig());
         if (!$this->isCreditCardSelectorEnabled() && $useAPIImage) {
             $iconUrlArray = [$this->getApiIcon($container)];
         }
@@ -385,6 +393,8 @@ abstract class AbstractPaymentMethod implements \Mollie\WooCommerce\PaymentMetho
         $title = $this->title($container);
         $iconProvider = $this->paymentMethodIconProvider($container);
         $icons = $this->shouldDisplayIcon() ? array_map(static fn(Icon $icon) => ['id' => $icon->id(), 'src' => $icon->src(), 'alt' => $icon->alt()], $iconProvider->provideIcons()) : [];
+        // phpstan:ignore [wc-stub] WC()->customer is WC_Customer|null at runtime; WooCommerce stubs declare it non-nullable
+        // @phpstan-ignore-next-line
         $billingCountry = WC()->customer ? WC()->customer->get_billing_country() : '';
         $allowedCountries = $this->getProperty('allowed_countries');
         $data = ['name' => $this->id(), 'paymentMethodId' => $this->id(), 'content' => $this->getProcessedDescriptionForBlock(), 'edit' => $this->getProcessedDescriptionForBlock(), 'hasSurcharge' => $this->hasSurcharge(), 'contentFallback' => __('Please choose a billing country to see the available payment methods', 'mollie-payments-for-woocommerce'), 'allowedCountries' => is_array($allowedCountries) ? $allowedCountries : [], 'ariaLabel' => $this->getProperty('defaultDescription'), 'errorMessage' => $this->getProperty('errorMessage'), 'companyPlaceholder' => $this->getProperty('companyPlaceholder'), 'phoneLabel' => $this->getProperty('phoneLabel'), 'phonePlaceholder' => self::PHONE_PLACEHOLDERS[$billingCountry] ?? self::PHONE_PLACEHOLDERS['NL'], 'birthdatePlaceholder' => $this->getProperty('birthdatePlaceholder'), 'isExpressEnabled' => $this->isExpressCheckoutEnabled(), 'hideCompanyField' => (bool) apply_filters('mollie_wc_hide_company_field', \false), 'shouldLoadComponents' => $this->getProperty('mollie_components_enabled') === 'yes', 'componentsDescription' => '', 'issuers' => $this->blocksIssuers($container), 'label' => ['title' => $title, 'iconsArray' => $icons]];

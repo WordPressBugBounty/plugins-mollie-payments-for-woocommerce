@@ -18,7 +18,7 @@ class InstructionsNotConnected extends \Mollie\WooCommerce\Settings\Page\Section
         ?></h3>
         <p>
             <?php 
-        echo esc_html(__("To start receiving payments through the Mollie plugin in your WooCommerce store,\n            you'll need to connect it to your Mollie account using an API key.", 'mollie-payments-for-woocommerce'));
+        echo wp_kses(sprintf(__("To start receiving payments through the Mollie plugin in your WooCommerce store,\n                you'll need to connect it to your Mollie account using an <a href='%s' target='_blank'>API access token.</a>", 'mollie-payments-for-woocommerce'), 'https://my.mollie.com/dashboard/developers/api-access-tokens?utm_source=woocommerce&utm_medium=plugin&utm_campaign=partner'), ['a' => ['href' => [], 'target' => []]]);
         ?>
         </p>
         <p>
@@ -41,12 +41,12 @@ class InstructionsNotConnected extends \Mollie\WooCommerce\Settings\Page\Section
             </li>
             <li>
                 <?php 
-        echo wp_kses(__("Navigate to <strong>Developers > API keys.</strong>", 'mollie-payments-for-woocommerce'), ['strong' => []]);
+        echo wp_kses(__("Navigate to <strong>Developers > API access tokens.</strong>", 'mollie-payments-for-woocommerce'), ['strong' => []]);
         ?>
             </li>
             <li>
                 <?php 
-        echo wp_kses(__("Click on <strong>Copy</strong> next to your API key.", 'mollie-payments-for-woocommerce'), ['strong' => []]);
+        echo wp_kses(__("Click <strong>+ Create access token</strong>, select <strong>Standard API key</strong> as the token type, choose your payment profile and API mode (Test or Live), then click <strong>Create access token</strong>.", 'mollie-payments-for-woocommerce'), ['strong' => []]);
         ?>
             </li>
             <li>

@@ -10,9 +10,9 @@ use Mollie\WooCommerce\Payment\Request\RequestFactory;
 use Mollie\WooCommerce\SDK\Api;
 use Mollie\WooCommerce\Settings\Settings;
 use Mollie\WooCommerce\Shared\SharedDataDictionary;
+use Mollie\Psr\Log\LoggerInterface as Logger;
 use WC_Order;
 use WC_Payment_Gateway;
-use Mollie\Psr\Log\LoggerInterface as Logger;
 class MollieObject
 {
     protected $data;
@@ -44,6 +44,8 @@ class MollieObject
     /**
      * @var null
      */
+    // phpstan:ignore [dead-code] typed @var null; kept as a placeholder — subclasses shadow this with properly typed versions
+    // @phpstan-ignore-next-line
     private $paymentMethod;
     protected RequestFactory $requestFactory;
     public function __construct($data, Logger $logger, \Mollie\WooCommerce\Payment\PaymentFactory $paymentFactory, Api $apiHelper, Settings $settingsHelper, string $pluginId, RequestFactory $requestFactory)
@@ -342,7 +344,7 @@ class MollieObject
                 $mollie_order = $this->paymentFactory->getPaymentObject($mollie_order);
             } catch (ApiException $exception) {
                 $this->logger->debug($exception->getMessage());
-                return;
+                return null;
             }
             return $this->getPaymentObjectPayment($mollie_order->getMolliePaymentIdFromPaymentObject(), $this->getActiveMolliePaymentMode($order_id) === 'test', $use_cache);
         }
@@ -479,8 +481,12 @@ class MollieObject
                     $subscriptions = wcs_get_subscriptions_for_renewal_order($order);
                 }
                 foreach ($subscriptions as $subscription) {
+                    // phpstan:ignore [mollie-stub] Mollie Payment object exposes id and mandateId as dynamic stdClass properties not covered by type definitions
+                    // @phpstan-ignore-next-line
                     $subscription->update_meta_data('_mollie_payment_id', $payment->id);
                     $subscription->update_meta_data('_mollie_mandate_id', $payment->mandateId);
+                    // phpstan:ignore [mollie-stub] Mollie Payment object exposes method as a dynamic property; also set_payment_method() may not be typed on WC_Subscription stubs
+                    // @phpstan-ignore-next-line
                     $subscription->set_payment_method('mollie_wc_gateway_' . $payment->method);
                     $subscription->save();
                     $subscriptionParentOrder = $subscription->get_parent();
@@ -539,7 +545,9 @@ class MollieObject
             $paymentID
         );
         //check if there is a reason for failed payment and print it to order note
-        $failureReason = $payment->details->failureReason ?? '';
+        // CC payments use failureReason/failureMessage; SEPA DD uses bankReasonCode/bankReason
+        $failureReason = $payment->details->failureReason ?? $payment->details->bankReasonCode ?? '';
+        $failureMessage = $payment->details->failureMessage ?? $payment->details->bankReason ?? '';
         if ($failureReason) {
             $orderNote = sprintf(
                 /* translators: Placeholder 1: payment method title, placeholder 2: payment ID, placeholder 3: failure reason, placeholder 4: failure message */
@@ -547,7 +555,7 @@ class MollieObject
                 $paymentMethodTitle,
                 $paymentID,
                 $failureReason,
-                $payment->details->failureMessage ?? ''
+                $failureMessage
             );
         }
         if (function_exists('wcs_order_contains_renewal') && wcs_order_contains_renewal($orderId)) {
@@ -557,6 +565,8 @@ class MollieObject
             // Send a "Failed order" email to notify the admin
             $emails = WC()->mailer()->get_emails();
             if (!empty($emails) && !empty($orderId) && !empty($emails['WC_Email_Failed_Order'])) {
+                // phpstan:ignore [wc-stub] WC_Email subclass accessed via mailer array; trigger() not typed on WC_Email base class in stubs
+                // @phpstan-ignore-next-line
                 $emails['WC_Email_Failed_Order']->trigger($orderId);
             }
         } elseif (mollieWooCommerceIsMollieGateway($gateway->id)) {
